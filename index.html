@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Timer</title>
+</head>
+<body>
+  <form>
+    <label>
+      Hours:
+      <input
+        max="23"
+        min="0"
+        name="hours"
+        placeholder="Hours"
+        value="0"
+        type="number"
+      />
+    </label>
+
+    <label>
+      Minutes:
+      <input
+        max="59"
+        min="0"
+        name="minutes"
+        placeholder="Minutes"
+        value="0"
+        type="number"
+      />
+    </label>
+
+    <label>
+      Seconds:
+      <input
+        max="59"
+        min="0"
+        name="seconds"
+        placeholder="Seconds"
+        value="0"
+        type="number"
+      />
+    </label>
+
+    <input type="submit" value="Start" />
+  </form>
+
+  <div class="timer">
+    <div class="card">
+      HOURS
+      <span class="hours">00</span>
+    </div>
+
+    <div class="card">
+      MINUTES
+      <span class="minutes">00</span>
+    </div>
+
+    <div class="card">
+      SECONDS
+      <span class="seconds">00</span>
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
