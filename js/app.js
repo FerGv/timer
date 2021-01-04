@@ -1,6 +1,5 @@
 // DOM elements
 const form = document.querySelector('form');
-const timer = document.querySelector('.timer');
 const hoursLabel = document.querySelector('.hours');
 const minutesLabel = document.querySelector('.minutes');
 const secondsLabel = document.querySelector('.seconds');
