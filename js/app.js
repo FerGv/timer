@@ -4,6 +4,7 @@ const hoursLabel = document.querySelector('.hours');
 const minutesLabel = document.querySelector('.minutes');
 const secondsLabel = document.querySelector('.seconds');
 const btnStop = document.querySelector('.btn-stop');
+const btnPause = document.querySelector('.btn-pause');
 
 // Enums
 const SECONDS_IN_AN_HOUR = 3600;
@@ -11,6 +12,7 @@ const SECONDS_IN_A_MINUTE = 60;
 const SECOND = 1000;
 
 let intervalId = null;
+let totalSeconds = 0;
 
 /**
  * Return a 2-digit number.
@@ -60,7 +62,7 @@ function getSeconds() {
  */
 function startTimer(event) {
   event.preventDefault();
-  let totalSeconds = getSeconds();
+  totalSeconds = getSeconds();
 
   if (!totalSeconds) {
     alert('You need to set at least 1 second.');
@@ -68,7 +70,32 @@ function startTimer(event) {
   }
 
   formatSeconds(totalSeconds);
+  clearIntervalId();
+  startInterval();
+}
 
+function stopTimer() {
+  clearIntervalId();
+  totalSeconds = 0;
+  formatSeconds(totalSeconds);
+}
+
+function pauseTimer() {
+  if (intervalId) {
+    clearIntervalId();
+    btnPause.textContent = 'Continue';
+  } else {
+    btnPause.textContent = 'Pause';
+    if (totalSeconds) startInterval();
+  }
+}
+
+function clearIntervalId() {
+  clearInterval(intervalId);
+  intervalId = null;
+}
+
+function startInterval() {
   intervalId = setInterval(() => {
     totalSeconds--;
     formatSeconds(totalSeconds);
@@ -76,9 +103,6 @@ function startTimer(event) {
   }, SECOND);
 }
 
-function stopTimer() {
-  clearInterval(intervalId);
-}
-
 form.addEventListener('submit', startTimer);
 btnStop.addEventListener('click', stopTimer);
+btnPause.addEventListener('click', pauseTimer);
