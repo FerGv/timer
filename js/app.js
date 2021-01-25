@@ -3,11 +3,14 @@ const form = document.querySelector('form');
 const hoursLabel = document.querySelector('.hours');
 const minutesLabel = document.querySelector('.minutes');
 const secondsLabel = document.querySelector('.seconds');
+const btnStop = document.querySelector('.btn-stop');
 
 // Enums
 const SECONDS_IN_AN_HOUR = 3600;
 const SECONDS_IN_A_MINUTE = 60;
 const SECOND = 1000;
+
+let intervalId = null;
 
 /**
  * Return a 2-digit number.
@@ -66,11 +69,16 @@ function startTimer(event) {
 
   formatSeconds(totalSeconds);
 
-  const intervalId = setInterval(() => {
+  intervalId = setInterval(() => {
     totalSeconds--;
     formatSeconds(totalSeconds);
-    if (!totalSeconds) clearInterval(intervalId);
+    if (!totalSeconds) stopTimer();
   }, SECOND);
 }
 
+function stopTimer() {
+  clearInterval(intervalId);
+}
+
 form.addEventListener('submit', startTimer);
+btnStop.addEventListener('click', stopTimer);
