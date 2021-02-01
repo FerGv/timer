@@ -81,6 +81,7 @@ function stopTimer() {
   clearIntervalId();
   totalSecondsRemaining = 0;
   formatSeconds(totalSecondsRemaining);
+  drawProgressBar({ stop: true });
 }
 
 function pauseTimer() {
@@ -107,7 +108,7 @@ function startInterval() {
   }, SECOND);
 }
 
-function drawProgressBar() {
+function drawProgressBar({ stop = false } = {}) {
   if (!progressBar) {
     progressBar = new ProgressBar.Circle('.progress-bar-custom', {
       color: '#14caf0',
@@ -117,8 +118,12 @@ function drawProgressBar() {
     });
   }
 
-  const progress = totalSecondsRemaining / totalSeconds;
-  progressBar.animate(progress);
+  if (stop) {
+    progressBar.animate(0);
+  } else {
+    const progress = totalSecondsRemaining / totalSeconds;
+    progressBar.animate(progress);
+  }
 }
 
 form.addEventListener('submit', startTimer);
