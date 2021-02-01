@@ -73,6 +73,7 @@ function startTimer(event) {
 
   formatSeconds(totalSecondsRemaining);
   clearIntervalId();
+  drawProgressBar();
   startInterval();
 }
 
