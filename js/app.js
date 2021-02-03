@@ -77,6 +77,9 @@ function startTimer(event) {
   startInterval();
 }
 
+/**
+ * Stop and reset timer.
+ */
 function stopTimer() {
   clearIntervalId();
   totalSecondsRemaining = 0;
@@ -84,6 +87,9 @@ function stopTimer() {
   drawProgressBar({ stop: true });
 }
 
+/**
+ * Pause/start timer interval.
+ */
 function pauseTimer() {
   if (intervalId) {
     clearIntervalId();
@@ -94,11 +100,17 @@ function pauseTimer() {
   }
 }
 
+/**
+ * Stop and delete interval.
+ */
 function clearIntervalId() {
   clearInterval(intervalId);
   intervalId = null;
 }
 
+/**
+ * Start interval to update every second the countdown.
+ */
 function startInterval() {
   intervalId = setInterval(() => {
     totalSecondsRemaining--;
@@ -108,6 +120,12 @@ function startInterval() {
   }, SECOND);
 }
 
+/**
+ * Draw a circular progress bar with the remaining seconds.
+ *
+ * @param {Object} options
+ *    - @param {Boolean} stop - If set, clear chart.
+ */
 function drawProgressBar({ stop = false } = {}) {
   if (!progressBar) {
     progressBar = new ProgressBar.Circle('.progress-bar-custom', {
@@ -126,6 +144,7 @@ function drawProgressBar({ stop = false } = {}) {
   }
 }
 
+// Events
 form.addEventListener('submit', startTimer);
 btnStop.addEventListener('click', stopTimer);
 btnPause.addEventListener('click', pauseTimer);
